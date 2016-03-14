@@ -9,25 +9,27 @@ if (defined('E_DEPRECATED')) {
     error_reporting(error_reporting() & ~E_DEPRECATED);
 }
 
-// Piwik configuration
+// Piwik configuration - Enter your Piwik installation URL, Site ID and user token here
 const PIWIK_URL = "http://piwik.example.com";
 const TOKEN = '12345678901234567890123456789012';
-const DOMAIN = 'http://example.com';
 const SITE_ID = 1;
 
-// Slimstat DB configuration
+// Slimstat configuration - Enter your database credentials and installation URL here
+const WEBSITE_DOMAIN = 'http://example.com';
 const DB_HOST = 'localhost';
 const DB_USER = 'user';
 const DB_PASSWORD = 'password';
 const DB_NAME = 'wordpress';
 const TABLE_PREFIX = 'wp_';
-const DB_OPTION_FIELD = 'slimstat_to_piwik_db_upgrade';
 const OLD_VERSION = false;
+
+
 if (OLD_VERSION) {
     $slimstat_tables = array('slim_stats', 'slim_stats_archive');
 } else {
     $slimstat_tables = array('slim_stats', 'slim_stats_3', 'slim_stats_archive', 'slim_stats_archive_3');
 }
+const DB_OPTION_FIELD = 'slimstat_to_piwik_db_upgrade';
 
 // Helper functions
 function debug($q, $c)
@@ -236,13 +238,13 @@ if ($total_left == 0) {
             }
 
             if (OLD_VERSION OR ($current_table != 'slim_stats' AND $current_table != 'slim_stats_archive')) {
-                $domain = (strlen($row["domain"] > 0)) ? "http://" . $row["domain"] : DOMAIN;
+                $domain = (strlen($row["domain"] > 0)) ? "http://" . $row["domain"] : WEBSITE_DOMAIN;
                 $res = $screenres[$row["screenres_id"]];
                 $ip = long2ip($row["ip"]);
                 $user_agent = $user_agents[$row["browser_id"]];
                 $custom = $browsers[$row["browser_id"]];
             } else {
-                $domain = DOMAIN;
+                $domain = WEBSITE_DOMAIN;
                 $res = $row["resolution"];
                 $ip = $row["ip"];
                 $user_agent = $row["user_agent"];
