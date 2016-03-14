@@ -1,0 +1,14 @@
+{
+  "name": "christianhennen/wp-slimstat-to-piwik",
+  "description": "Migrate your WP Slimstat Analytics visitor log to Piwik",
+  "authors": [
+    {
+      "name": "Christian Hennen",
+      "email": "christian@christian-hennen.de",
+      "homepage": "https://www.christian-hennen.de"
+    }
+  ],
+  "require":{
+    "piwik/piwik-php-tracker": "^1.0"
+  }
+}
